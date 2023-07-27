@@ -10,7 +10,7 @@ Our approach aligns with multiple UN SDGs. "Good Health and Well-being" thrives 
 Biosense is designed to be an IoT system for indoor plant care, monitoring health and offering personalized recommendations for growth.
 
 ## How we Built it 🏠
----
+
 Framework: Next.js, Tailwind
 
 ORM: Prisma

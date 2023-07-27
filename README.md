@@ -25,3 +25,10 @@ Biosense is designed to be an IoT system for indoor plant care, monitoring healt
 ---
 
 
+## Contributors
+The following people who have contributed to this project:
+
+- [Akebu Simasiku](https://github.com/akebu6)
+- [Hanna Park](https://github.com/PaigeTurtle)
+- [Kiana Marfo](https://github.com/kianamarfo)
+- [Shirsendu Bairagi](https://github.com/shba007)

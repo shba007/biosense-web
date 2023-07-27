@@ -12,8 +12,11 @@ Biosense is designed to be an IoT system for indoor plant care, monitoring healt
 ## How we Built it 🏠
 ---
 Framework: Next.js, Tailwind
+
 ORM: Prisma
+
 Language: Typescript
+
 Database: PostgreSQL
 
 ## Accomplishments 💪🏻

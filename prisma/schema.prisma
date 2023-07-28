@@ -6,6 +6,10 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model Device {
+  id String @id @default(uuid())
 }

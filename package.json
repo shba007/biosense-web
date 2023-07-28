@@ -3,6 +3,9 @@
   "description": "IoT system for indoor plant care, monitoring health and offering personalized recommendations for growth.",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "^18.17.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

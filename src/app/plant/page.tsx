@@ -7,12 +7,12 @@ import { v4 as uuidv4 } from 'uuid';
 
 // const mqtt = { connect };
 
-function formatNotation(number: number) {
+function formatExponent(number: number) {
   // Get the exponent part using toExponential() and split it
   const [coefficient, exponent] = number.toExponential().split('e');
 
   // Format the coefficient part to remove trailing zeros
-  const formattedCoefficient = parseFloat(coefficient).toFixed(0);
+  const formattedCoefficient = parseFloat(coefficient).toFixed(1);
 
   // Format the exponent part to remove leading zeros and add a plus sign if needed
   const formattedExponent = parseInt(exponent)
@@ -38,6 +38,8 @@ export default function PlantPage() {
   const [connected, setConnected] = useState(false);
 
   const [luminosity, setLuminosity] = useState<number>(0);
+  const [temperature, setTemperature] = useState<number>(0);
+  const [humidity, setHumidity] = useState<number>(0);
   const [moisture, setMoisture] = useState<number>(0);
   const [lightActive, setLightActive] = useState(false);
   const [sprayActive, setSprayActive] = useState(false);
@@ -103,6 +105,8 @@ export default function PlantPage() {
     // Subscribe to a topic
     const topics = [
       'sensor/luminosity',
+      'sensor/temperature',
+      'sensor/humidity',
       'sensor/moisture',
       'light/state',
       'spray/amount',
@@ -122,6 +126,12 @@ export default function PlantPage() {
       switch (topic) {
         case 'sensor/luminosity':
           setLuminosity(parseFloat(data));
+          break;
+        case 'sensor/temperature':
+          setTemperature(parseFloat(data));
+          break;
+        case 'sensor/humidity':
+          setHumidity(parseFloat(data));
           break;
         case 'sensor/moisture':
           setMoisture(parseFloat(data));
@@ -161,31 +171,31 @@ export default function PlantPage() {
           <li className="flex flex-col font-medium">
             <span className="opacity-40">Luminosity</span>
             <span className="text-2xl">
-              {formatNotation(luminosity ?? 0)} lux
+              {formatExponent(luminosity ?? 0)} lux
             </span>
           </li>
           <li className="flex flex-col font-medium">
             <span className="opacity-40">Temperature</span>
-            <span className="text-2xl">28 °C</span>
+            <span className="text-2xl">{temperature.toFixed(1)} °C</span>
           </li>
           <li className="flex flex-col font-medium">
             <span className="opacity-40">Humidity</span>
-            <span className="text-2xl">50 %</span>
+            <span className="text-2xl">{humidity.toFixed(1)} %</span>
           </li>
           <li className="flex flex-col font-medium">
             <span className="opacity-40">Soil Moisture</span>
-            <span className="text-2xl">{moisture} %</span>
+            <span className="text-2xl">{moisture.toFixed(1)} %</span>
           </li>
         </ul>
         <div className="fixed sm:absolute left-full sm:right-0 top-1/2 -translate-x-[40%] sm:-translate-x-full -translate-y-1/2 w-[430px] h-[430px]">
           <div className="w-full h-full rounded-full bg-[#CEDFF7] absolute shadow-[0px_0px_12px_0px_rgba(0,0,0,0.25)_inset]"></div>
           <div className="w-[75%] aspect-square rounded-full bg-[#CEDFF7] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-[0px_0px_12px_0px_rgba(0,0,0,0.25)_inset]"></div>
           <div className="w-[50%] aspect-square rounded-full bg-[#CEDFF7] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-[0px_0px_12px_0px_rgba(0,0,0,0.25)_inset]"></div>
-          <div className="relative top-2 rounded-b-[50%] overflow-hidden">
+          <div className="relative w-full h-full rounded-b-[50%] overflow-hidden">
             <img
               src="images/aloe-vera.png"
               alt="aloe-vera"
-              className="md:mx-auto"
+              className="md:mx-auto w-full object-contain -translate-x-1/4 md:translate-x-0 -translate-y-[5%] scale-[80%]"
             />
           </div>
         </div>

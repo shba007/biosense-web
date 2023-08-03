@@ -6,6 +6,15 @@ generator client {
 }
 
 datasource db {
-  provider = "cockroachdb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model SensorData {
+  sensorId Int @id @default(autoincrement())
+  timestamp DateTime
+  temperature Float
+  humidity Float
+  soilMoisture Float
+  lightIntensity Float
 }

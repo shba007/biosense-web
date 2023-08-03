@@ -5,11 +5,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma update && next build",
     "start": "next start",
     "lint": "next lint"
   },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "dependencies": {
+    "@prisma/client": "^5.1.0",
     "@types/node": "20.4.4",
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
@@ -24,6 +28,7 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
-    "prisma": "^5.0.0"
+    "prisma": "^5.1.0",
+    "ts-node": "^10.9.1"
   }
 }

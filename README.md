@@ -9,11 +9,6 @@ For the aim of  "Good Health and Well-being" we want indoor plants to enhance ai
 
 Our system combines the internet of things (IoT) which senses the environment to detect the health of plants, all whilst identifying any diseases it may carry. We are using PostgreSQL IoT which monitors luminosity, temperature, humidity and soil temperature. Once a disease is identified, the system gives personalised recommendations for better health and growth.
 
-
-## Purpose 🤔
----
-Biosense is designed to be an IoT system for indoor plant care, monitoring health and offering personalized recommendations for growth and disease detection.
-
 ## How we Built it 🏠
 
 Framework: Next.js, Tailwind
@@ -44,8 +39,17 @@ Soft Skills: Collaborating on this project matured our communication, leadership
 
 ## Insights 🤓
 ---
+By analyzing data, providing personalized recommendations, and enabling remote monitoring, users can create an optimal environment for their plants. 
+
+However, this could be used on a larger scale for farmers and has several positive impacts for both them and the environment:
+
+1. Water Conservation: The irrigation system can monitor soil moisture levels and weather conditions to optimise water usage. This would be particularly salient for environments which face drought or water scarcity.
+   
+2. Reduction in Chemical use: Monitoring plant vitals: health metrics/diseases can help farmers apply fertilisers more precisely and when necessary. This leads to less environmental pollution and biodiversity conservation of both that ecosystem and surrounding ones.
+
+3. Alleviating Climate Change: Sustainable farming guided by Biosense can lead to healthy soils sequestering carbon and reduces the carbon footprint associated with irrigation.
 
 ## What's Next for Biosense ❓
 ---
-
+Continue developing the application because we want to impliment this in our lives!
 

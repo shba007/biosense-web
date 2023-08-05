@@ -8,6 +8,7 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import AppButton from '@/components/Button';
 import AppActionButton from '@/components/ActionButton';
 import SectionInfo from '@/components/SectionInfo';
+import SectionChart from '@/components/SectionChart';
 import SectionScan from '@/components/SectionScan';
 import Pagination from '@/components/Pagination';
 
@@ -84,14 +85,7 @@ export default function PlantPage() {
     });
 
     // Subscribe to a topic
-    const topics = [
-      'sensor/luminosity',
-      'sensor/temperature',
-      'sensor/humidity',
-      'sensor/moisture',
-      'light/state',
-      'spray/amount',
-    ];
+    const topics = '#';
     client.subscribe(topics, (err) => {
       if (err) {
         console.error('Error subscribing to topics:', err);
@@ -117,6 +111,8 @@ export default function PlantPage() {
         case 'sensor/moisture':
           setMoisture(parseFloat(data));
           break;
+        case 'sensor/airquality':
+          break;
         case 'light/state':
           setLightActive(data === 'ON');
           break;
@@ -125,7 +121,7 @@ export default function PlantPage() {
           setTimeout(() => setSprayActive(false), parseInt(data) * 300);
           break;
         default:
-          console.log('Received message:', data);
+          console.log('Received message:', topic, data);
           break;
       }
     });
@@ -141,7 +137,7 @@ export default function PlantPage() {
   }
 
   function changeSlide() {
-    splide.current!.go((currentPage + 1) % 2);
+    splide.current!.go((currentPage + 1) % 3);
   }
 
   return (
@@ -167,6 +163,9 @@ export default function PlantPage() {
           />
         </SplideSlide>
         <SplideSlide>
+          <SectionChart />
+        </SplideSlide>
+        <SplideSlide>
           <SectionScan />
         </SplideSlide>
       </Splide>
@@ -181,7 +180,7 @@ export default function PlantPage() {
           onToggle={toggleLightState}
         />
         <AppButton
-          icon="chart"
+          page={currentPage}
           className="translate-y-1/2"
           onClick={changeSlide}
         />

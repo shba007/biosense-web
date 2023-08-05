@@ -12,13 +12,15 @@
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
-    "seed": "prisma db seed"
+    "seed": "prisma db seed",
+    "cron": "ts-node --compiler-options {\\\"module\\\":\\\"commonjs\\\"} job/db.ts"
   },
   "prisma": {
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+    "seed": "ts-node --compiler-options {\"module\":\"commonjs\"} prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.1.1",
+    "@splidejs/react-splide": "^0.7.12",
     "@types/node": "20.4.7",
     "@types/react": "18.2.18",
     "@types/react-dom": "18.2.7",
@@ -30,6 +32,7 @@
     "eslint-config-next": "13.4.12",
     "mqtt": "^5.0.2",
     "next": "13.4.12",
+    "node-cron": "^3.0.2",
     "ofetch": "^1.1.1",
     "postcss": "8.4.27",
     "react": "18.2.0",
@@ -41,6 +44,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@types/node-cron": "^3.0.8",
     "prisma": "^5.1.1",
     "ts-node": "^10.9.1"
   }

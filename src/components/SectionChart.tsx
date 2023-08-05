@@ -14,7 +14,7 @@ interface Sensor {
   }[];
 }
 
-export default function Home() {
+export default function SectionChart() {
   const [sensors, setSensors] = useState<Sensor[]>([]);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-4 ">
+    <section className="flex flex-col items-center justify-between p-4 ">
       <ul className="flex flex-col">
         {sensors.map(({ id, timeline }) => (
           <li key={id}>
@@ -62,7 +62,6 @@ export default function Home() {
           </li>
         ))}
       </ul>
-      Hello
-    </main>
+    </section>
   );
 }

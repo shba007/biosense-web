@@ -13,7 +13,7 @@ import SectionScan from '@/components/SectionScan';
 import Pagination from '@/components/Pagination';
 
 export default function PlantPage() {
-  const splide = useRef<Splide>();
+  const splide = useRef<any>();
   const [currentPage, setCurrentPage] = useState(0);
 
   const [client, setClient] = useState<MqttClient>();

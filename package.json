@@ -14,24 +14,30 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@prisma/client": "^5.0.0",
+    "@prisma/client": "^5.1.0",
+    "@splidejs/react-splide": "^0.7.12",
     "@types/node": "20.4.5",
-    "@types/react": "18.2.17",
+    "@types/react": "18.2.18",
     "@types/react-dom": "18.2.7",
     "@types/uuid": "^9.0.2",
     "autoprefixer": "10.4.14",
-    "eslint": "8.45.0",
+    "chart.js": "^4.3.3",
+    "compressorjs": "^1.2.1",
+    "eslint": "8.46.0",
     "eslint-config-next": "13.4.12",
-    "mqtt": "^5.0.0",
+    "mqtt": "^5.0.1",
     "next": "13.4.12",
+    "ofetch": "^1.1.1",
     "postcss": "8.4.27",
     "react": "18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",
+    "sharp": "^0.32.4",
     "tailwindcss": "3.3.3",
     "typescript": "5.1.6",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "prisma": "^5.0.0"
+    "prisma": "^5.1.0"
   }
 }

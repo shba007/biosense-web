@@ -1,0 +1,24 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M8.49994 24C8.49994 15.1634 15.6634 8 24.4999 8C33.3365 8 40.4999 15.1634 40.4999 24C40.4999 32.8366 33.3365 40 24.4999 40C15.6634 40 8.49994 32.8366 8.49994 24ZM24.4999 13.3333C18.6089 13.3333 13.8333 18.109 13.8333 24C13.8333 29.891 18.6089 34.6667 24.4999 34.6667C30.391 34.6667 35.1666 29.891 35.1666 24C35.1666 18.109 30.391 13.3333 24.4999 13.3333Z" fill="black" fill-opacity="0.5">
+    <animateTransform
+      attributeName="transform"
+      attributeType="XML"
+      type="rotate"
+      from="0 24 24"
+      to="360 24 24"
+      dur="800ms"
+      repeatCount="indefinite"
+    />
+  </path>
+  <path d="M13.8333 24C13.8333 21.171 14.9571 18.4579 16.9575 16.4575C18.9579 14.4571 21.671 13.3333 24.4999 13.3333V8C15.6639 8 8.49994 15.164 8.49994 24H13.8333ZM16.4999 31.0547C14.7776 29.1088 13.8287 26.5987 13.8333 24H8.49994C8.49994 28.056 10.0133 31.7653 12.4999 34.584L16.4999 31.0547Z" fill="black">
+    <animateTransform
+      attributeName="transform"
+      attributeType="XML"
+      type="rotate"
+      from="0 24 24"
+      to="360 24 24"
+      dur="800ms"
+      repeatCount="indefinite"
+    />
+  </path>
+</svg>

@@ -1,39 +1,19 @@
 'use client';
-import Image from 'next/image';
-import AppButton from '@/components/Button';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { MqttClient, connect } from 'mqtt';
 import { v4 as uuidv4 } from 'uuid';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 
-// const mqtt = { connect };
-
-function formatExponent(number: number) {
-  // Get the exponent part using toExponential() and split it
-  const [coefficient, exponent] = number.toExponential().split('e');
-
-  // Format the coefficient part to remove trailing zeros
-  const formattedCoefficient = parseFloat(coefficient).toFixed(1);
-
-  // Format the exponent part to remove leading zeros and add a plus sign if needed
-  const formattedExponent = parseInt(exponent)
-    .toString()
-    .replace(/^(-)?0+/, (match, p1) => (p1 ? '-0' : ''));
-  const sign = formattedExponent.startsWith('-') ? '-' : '';
-
-  return (
-    <span className="relative mr-2">
-      {formattedCoefficient} x 10
-      <span className="absolute -top-1 -right-2 text-sm">
-        {sign}
-        {Number.isNaN(Math.abs(parseInt(formattedExponent)))
-          ? 0
-          : Math.abs(parseFloat(formattedExponent))}
-      </span>
-    </span>
-  );
-}
+import AppButton from '@/components/Button';
+import AppActionButton from '@/components/ActionButton';
+import SectionInfo from '@/components/SectionInfo';
+import SectionScan from '@/components/SectionScan';
+import Pagination from '@/components/Pagination';
 
 export default function PlantPage() {
+  const splide = useRef();
+  const [currentPage, setCurrentPage] = useState(0);
+
   const [client, setClient] = useState<MqttClient>();
   const [connected, setConnected] = useState(false);
 
@@ -150,67 +130,67 @@ export default function PlantPage() {
     });
   }, [client]);
 
+  function onMove(
+    _slide: any,
+    list: { items: string | any[] },
+    _prev: any,
+    curr: { page: number }
+  ) {
+    setCurrentPage(curr?.page ?? 0);
+  }
+
+  function changeSlide() {
+    splide.current!.go((currentPage + 1) % 2);
+  }
+
   return (
-    <div className="flex-grow relative flex flex-col justify-between h-full overflow-x-clip">
-      <section>
-        <h1 className="text-[2rem] font-semibold">Aloe Vera</h1>
-        <h2 className="text-base font-medium opacity-40">
-          Aloe barbadensis miller
-        </h2>
-      </section>
-      <section>
-        <ul className="flex flex-col gap-6">
-          <li className="flex flex-col font-medium">
-            <span className="opacity-40">Water Intake</span>
-            <span className="text-2xl">0 ml</span>
-          </li>
-          <li className="flex flex-col font-medium">
-            <span className="opacity-40">Age</span>
-            <span className="text-2xl">2 Week</span>
-          </li>
-          <li className="flex flex-col font-medium">
-            <span className="opacity-40">Luminosity</span>
-            <span className="text-2xl">
-              {formatExponent(luminosity ?? 0)} lux
-            </span>
-          </li>
-          <li className="flex flex-col font-medium">
-            <span className="opacity-40">Temperature</span>
-            <span className="text-2xl">{temperature.toFixed(1)} °C</span>
-          </li>
-          <li className="flex flex-col font-medium">
-            <span className="opacity-40">Humidity</span>
-            <span className="text-2xl">{humidity.toFixed(1)} %</span>
-          </li>
-          <li className="flex flex-col font-medium">
-            <span className="opacity-40">Soil Moisture</span>
-            <span className="text-2xl">{moisture.toFixed(1)} %</span>
-          </li>
-        </ul>
-        <div className="fixed sm:absolute left-full sm:right-0 top-1/2 -translate-x-[40%] sm:-translate-x-full -translate-y-1/2 w-[430px] h-[430px]">
-          <div className="w-full h-full rounded-full bg-[#CEDFF7] absolute shadow-[0px_0px_12px_0px_rgba(0,0,0,0.25)_inset]"></div>
-          <div className="w-[75%] aspect-square rounded-full bg-[#CEDFF7] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-[0px_0px_12px_0px_rgba(0,0,0,0.25)_inset]"></div>
-          <div className="w-[50%] aspect-square rounded-full bg-[#CEDFF7] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-[0px_0px_12px_0px_rgba(0,0,0,0.25)_inset]"></div>
-          <div className="relative w-full h-full rounded-b-[50%] overflow-hidden">
-            <img
-              src="images/aloe-vera.png"
-              alt="aloe-vera"
-              className="md:mx-auto w-full object-contain -translate-x-1/4 md:translate-x-0 -translate-y-[5%] scale-[80%]"
-            />
-          </div>
-        </div>
-      </section>
-      <section className="flex justify-between gap-4">
-        <AppButton
+    <div className="relative flex-grow flex flex-col gap-6 justify-between min-h-full w-full">
+      <div className="sm:hidden"></div>
+      <Splide
+        className="relative w-screen -left-4 mt-auto"
+        ref={splide}
+        options={{
+          perPage: 1,
+          arrows: false,
+          padding: '1rem',
+          gap: '2rem',
+        }}
+        onPaginationUpdated={onMove}
+      >
+        <SplideSlide>
+          <SectionInfo
+            luminosity={luminosity}
+            temperature={temperature}
+            humidity={humidity}
+            moisture={moisture}
+          />
+        </SplideSlide>
+        <SplideSlide>
+          <SectionScan />
+        </SplideSlide>
+      </Splide>
+      <div className="relative -left-4 flex justify-between items-center sm:mb-2 w-screen overflow-x-clip">
+        <Pagination
+          page={currentPage}
+          className="absolute top-8 left-1/2 -translate-x-1/2"
+        />
+        <AppActionButton
           icon={`lightbulb-${lightActive ? 'active' : 'inactive'}`}
+          state={lightActive}
           onToggle={toggleLightState}
         />
         <AppButton
+          icon="chart"
+          className="translate-y-1/2"
+          onClick={changeSlide}
+        />
+        <AppActionButton
           icon={`raindrop-${sprayActive ? 'active' : 'inactive'}`}
+          state={sprayActive}
+          flip={true}
           onPress={toggleSprayState}
         />
-        <AppButton icon="growth" title="Details" className="ml-auto" />
-      </section>
+      </div>
     </div>
   );
 }

@@ -21,14 +21,14 @@ module.exports = {
         600: '#2D2F34',
       },
       primary: {
-        400: '#60A5fA',
-        500: '#CEDFF7',
-        600: '#2563EB',
+        400: '#85ADD8',
+        500: '#60A5fA',
+        600: '#CEDFF7',
       }
     },
     extend: {
       boxShadow: {
-        button: '0px 18px 36px 0px rgba(0, 0, 0, 0.15)',
+        button: '0px 12px 24px 0px rgba(0, 0, 0, 0.10)',
       },
     }
   },

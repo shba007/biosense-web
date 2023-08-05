@@ -34,7 +34,7 @@ function imageBlobToBase64(blob: Blob) {
 export default function SectionScan({}) {
   const snapshot = useRef<HTMLImageElement | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [diseases, setDiseases] = useState<[{ disease: string; prob: number }]>(
+  const [diseases, setDiseases] = useState<{ disease: string; prob: number }[]>(
     []
   );
 

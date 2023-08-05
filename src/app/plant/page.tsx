@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { MqttClient, connect } from 'mqtt';
 import { v4 as uuidv4 } from 'uuid';
+// @ts-ignore
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 import AppButton from '@/components/Button';
@@ -11,7 +12,7 @@ import SectionScan from '@/components/SectionScan';
 import Pagination from '@/components/Pagination';
 
 export default function PlantPage() {
-  const splide = useRef();
+  const splide = useRef<Splide>();
   const [currentPage, setCurrentPage] = useState(0);
 
   const [client, setClient] = useState<MqttClient>();

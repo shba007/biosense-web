@@ -60,37 +60,24 @@ async function predict(images: Buffer[]): Promise<number[][]> {
     const embeddings = await ofetch("/plant_disease:predict", { baseURL: config.apiUrl, method: "POST", body: { "instances": preprocessedImages } })
 
     return postprocess(embeddings['predictions'])
-  } catch (error) {
+  } catch (error: any) {
     throw Error("Failed request Tensorflow Serving /feature_extractor:predict", error)
   }
 }
 
-async function postprocess(embeddings: number[][]): Promise<string[][]> {
-  const filteredProductsSKUs: string[][] = []
+async function postprocess(embeddings: number[][]): Promise<number[][]> {
+  const filteredCategory: number[][] = []
 
   await Promise.all(embeddings.map(async (embedding) => {
     try {
-      /*  const result = await qdrant.search("Earrings", {
-         vector: embedding,
-         limit: 20,
-       });
-
-      const products: { lakeId: string, sku: string }[] = result.map(({ payload }) => ({ lakeId: payload.lakeId as string, sku: payload.sku as string }))
-      const filteredProductSKUs = new Set<string>()
-      products.filter((product) => product.sku !== '')
-        .forEach((product) => filteredProductSKUs.add(product.sku))
-
-      filteredProductsSKUs.push([...filteredProductSKUs]) */
-      // ["bacterial leaf spot pothos","fine","yellow leaf"]
-
-      filteredProductsSKUs.push([...embedding])
-    } catch (error) {
+      filteredCategory.push([...embedding])
+    } catch (error: any) {
       throw Error("Failed request Qdrant", error)
     }
   }))
   // console.log(filteredProductsSKUs);
 
-  return filteredProductsSKUs
+  return filteredCategory
 }
 
 export interface SearchProduct extends Omit<Product, 'ratings'> {
@@ -112,7 +99,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Open image with that id
     const imageArray = await base64ToArray(image)
     // Make image Crops using the boxes
-    const images = await cropImage(imageArray, boxes)
+    const images = await cropImage(imageArray ?? Buffer.from([]), boxes)
     // console.log({ images });
     const labels = await predict(images)
     const diseases = ["bacterial leaf spot pothos", "fine", "yellow leaf"]

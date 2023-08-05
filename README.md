@@ -21,10 +21,9 @@ Database: PostgreSQL
 
 ## Design
 ---
-![image](https://github.com/shba007/biosense-web/assets/125701923/96b02a7e-df46-4f3b-b276-47f97dbb80e3)
+![Mobile Preview](public/previews/mobile-preview.png)
 
-Desktop Screenshot:
-![image](https://github.com/shba007/biosense-web/assets/125701923/b22232a3-b826-46ee-b452-804a737e7f5c)
+![Desktop Preview](https://github.com/shba007/biosense-web/assets/125701923/b22232a3-b826-46ee-b452-804a737e7f5c)
 
 ## Accomplishments 💪🏻
 ---

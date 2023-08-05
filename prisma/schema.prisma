@@ -11,5 +11,16 @@ datasource db {
 }
 
 model Device {
-  id String @id @default(uuid())
+  id       String @id @default(uuid())
+  timeline Data[]
+}
+
+model Data {
+  device      Device?  @relation(fields: [deviceId], references: [id])
+  deviceId    String?
+  timestamp   DateTime @unique @default(now())
+  temperature Float
+  humidity    Float
+  moisture    Float
+  luminosity  Float
 }

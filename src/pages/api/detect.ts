@@ -2,8 +2,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { ofetch } from 'ofetch'
 
 import sharp from "sharp";
-import { Box, Product } from "../utils/models";
-import { convertBox, resize, reshape, base64ToArray } from "../utils/helper";
+import { Box, Product } from "../../utils/models";
+import { convertBox, resize, reshape, base64ToArray } from "../../utils/helper";
 
 const CLASS_DIM: [number, number] = [224, 224]
 

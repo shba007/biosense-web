@@ -99,7 +99,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const images = await cropImage(imageArray ?? Buffer.from([]), boxes)
     // console.log({ images });
     const labels = await predict(images)
-    // "Powdery Mildew", "Root Rot", "Leaf Spot"
+    // "Powdery Mildew", "Root Rot", "Leaf Spot", "Gray Mold"
     const diseases = ["Cercospora", "Leaf Spot", "Gray Mold", "Powdery Mildew", "Rust", "Sooty Mold", "White Mold", "Anthracnose", "Leaf Spot", "Healthy"]
 
     return res.status(200).json(combineProbabilities(labels[0].map((prob, index) => ({

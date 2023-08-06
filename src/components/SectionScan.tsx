@@ -69,13 +69,13 @@ export default function SectionScan({}) {
   }
 
   return (
-    <section>
+    <section className="flex flex-col justify-between items-center h-full">
       <div className="mx-auto rounded-xl w-full max-w-2xl aspect-[4/3] sm:aspect-[16/9] bg-primary-400/50 shadow-[0px_2px_18px_0px_rgba(0,0,0,0.15)_inset] overflow-hidden">
         <img ref={snapshot} className="w-full h-full object-contain" />
       </div>
       <label
         htmlFor="image"
-        className={`flex justify-center items-center gap-1 mx-auto my-8
+        className={`flex justify-center items-center gap-1
          px-4 py-4 rounded-full h-fit w-fit bg-[#FBFDFF] shadow-button cursor-pointer`}
       >
         <Image
@@ -94,7 +94,7 @@ export default function SectionScan({}) {
         className="hidden"
         onChange={($event: any) => select($event!.target!.files)}
       />
-      <ul className="flex flex-col">
+      <ul className="grow flex flex-col self-stretch max-h-[10rem] overflow-y-auto ">
         {diseases.map(({ disease, prob }) => (
           <li className="flex justify-between" key={disease}>
             <span className="capitalize">{disease}</span>

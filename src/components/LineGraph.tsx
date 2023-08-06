@@ -103,11 +103,11 @@ export default function LineGraph({
       };
     }),
   };
-  console.log(sampledData);
 
   return (
     <div className="w-screen overflow-x-auto scrollbar-hidden scroll-rtl bg-gradient-to-b from-[rgba(52,211,153,0)] from-0% via-[rgba(52,211,153,0.50)] via-60% to-[rgba(52,211,153,0.50)] to-100%">
       <div className="min-w-[300vw] h-[218px]">
+        {/* @ts-ignore */}
         <Line options={options} data={sampledData} />
       </div>
     </div>

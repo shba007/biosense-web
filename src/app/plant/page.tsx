@@ -141,7 +141,7 @@ export default function PlantPage() {
   }
 
   return (
-    <div className="relative flex-grow flex flex-col gap-6 justify-between min-h-full w-full">
+    <div className="relative flex-grow flex flex-col gap-2 justify-between w-full min-h-screen h-max">
       <div className="sm:hidden"></div>
       <Splide
         className="relative w-screen -left-4 mt-auto"

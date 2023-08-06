@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`flex justify-center items-center ${workSans.className} px-4 pt-8 w-screen min-h-screen bg-gradient-to-t from-primary-600 overflow-hidden`}
+        className={`flex justify-center items-center ${workSans.className} px-4 w-screen min-h-screen h-max bg-gradient-to-t from-primary-600 overflow-x-hidden scrollbar-hidden`}
       >
         {children}
       </body>

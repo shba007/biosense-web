@@ -57,11 +57,11 @@ async function predict(images: Buffer[]): Promise<number[][]> {
 
   const preprocessedImages = await preprocess(images)
   try {
-    const embeddings = await ofetch("/plant_disease:predict", { baseURL: config.apiUrl, method: "POST", body: { "instances": preprocessedImages } })
+    const embeddings = await ofetch("/indoor_plant_disease:predict", { baseURL: config.apiUrl, method: "POST", body: { "instances": preprocessedImages } })
 
     return postprocess(embeddings['predictions'])
   } catch (error: any) {
-    throw Error("Failed request Tensorflow Serving /feature_extractor:predict", error)
+    throw Error("Failed request Tensorflow Serving " + config.apiUrl + "\n" + error)
   }
 }
 
@@ -75,7 +75,6 @@ async function postprocess(embeddings: number[][]): Promise<number[][]> {
       throw Error("Failed request Qdrant", error)
     }
   }))
-  // console.log(filteredProductsSKUs);
 
   return filteredCategory
 }
@@ -102,7 +101,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const images = await cropImage(imageArray ?? Buffer.from([]), boxes)
     // console.log({ images });
     const labels = await predict(images)
-    const diseases = ["bacterial leaf spot pothos", "fine", "yellow leaf"]
+    const diseases = ["Cercospora", "Fungal Leaf Spots", "Gray Mold", "Powdery Mildew", "Rust", "Sooty Mold", "White Mold", "Anthracnose", "Bacterial Leaf Spot", "Healthy"]
 
     return res.status(200).json(labels[0].map((prob, index) => ({
       disease: diseases[index],
@@ -114,6 +113,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     console.error("API search POST", error);
 
-    throw new Error(JSON.stringify({ statusCode: 500, statusMessage: 'Some Unknown Error Found' }))
+    res.status(500).json({ statusMessage: 'Some Unknown Error Found' })
   }
 }

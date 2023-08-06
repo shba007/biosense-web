@@ -35,7 +35,7 @@ Soft Skills: Collaborating on this project matured our communication, leadership
 
 ## Challenges we ran into 😦
 ---
-
+- Utilising the MQTT proved difficult
 
 ## Insights 🤓
 ---

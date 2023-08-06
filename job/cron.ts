@@ -3,11 +3,8 @@ import { prisma } from '../src/db';
 import { connect } from 'mqtt';
 import cron from 'node-cron';
 
-console.log(process.env.NEXT_PUBLIC_MQTT_URL, process.env.NEXT_PUBLIC_MQTT_USERNAME, process.env.NEXT_PUBLIC_MQTT_PASSWORD);
-
-
 // Connect to MQTT broker
-const client = connect(`mqtts://${process.env.NEXT_PUBLIC_MQTT_URL}:8884/mqtt`, {
+const client = connect(`mqtts://${process.env.NEXT_PUBLIC_MQTT_URL}:8883`, {
   username: process.env.NEXT_PUBLIC_MQTT_USERNAME,
   password: process.env.NEXT_PUBLIC_MQTT_PASSWORD,
   clientId: 'cron-job',
@@ -24,8 +21,18 @@ interface Data {
 
 async function updateDatabase(data: Data) {
   try {
+    if (data.deviceId === null)
+      throw new Error("Device Id null")
     // Update the value in the database using the Prisma client
-    await prisma.data.create({ data })
+    await prisma.data.create({
+      data: {
+        deviceId: data.deviceId,
+        luminosity: data.luminosity,
+        temperature: data.temperature,
+        humidity: data.humidity,
+        moisture: data.moisture
+      }
+    })
     console.log('Database updated successfully:', data);
   } catch (error) {
     console.error('Error updating database:', error);
@@ -54,14 +61,7 @@ function main() {
   });
 
   // Subscribe to a topic
-  const topics = [
-    'sensor/luminosity',
-    'sensor/temperature',
-    'sensor/humidity',
-    'sensor/moisture',
-    // 'light/state',
-    // 'spray/amount',
-  ];
+  const topics = "#"
   client.subscribe(topics, (err) => {
     if (err) {
       console.error('Error subscribing to topics:', err);
@@ -88,13 +88,15 @@ function main() {
       case 'sensor/moisture':
         currentData.moisture = parseFloat(data)
         break;
+      case 'sensor/airquality':
+        break;
       default:
-        console.log('Received message:', data);
+        console.log('Received message:', topic, data);
         break;
     }
   });
 
-  cron.schedule('*/5 * * * *', () => {
+  cron.schedule('* 15 * * * *', () => {
     updateDatabase(currentData);
   });
 }

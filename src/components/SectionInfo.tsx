@@ -1,4 +1,4 @@
-function formatExponent(number: number) {
+export function formatExponent(number: number) {
   // Get the exponent part using toExponential() and split it
   const [coefficient, exponent] = number.toExponential().split('e');
 

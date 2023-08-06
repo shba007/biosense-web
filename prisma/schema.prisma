@@ -16,11 +16,13 @@ model Device {
 }
 
 model Data {
-  device      Device?  @relation(fields: [deviceId], references: [id])
-  deviceId    String?
-  timestamp   DateTime @unique @default(now())
+  device      Device   @relation(fields: [deviceId], references: [id])
+  deviceId    String
+  timestamp   DateTime @default(now())
   temperature Float
   humidity    Float
   moisture    Float
   luminosity  Float
+
+  @@unique([deviceId, timestamp])
 }

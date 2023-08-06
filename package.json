@@ -13,7 +13,7 @@
     "lint": "next lint",
     "postinstall": "prisma generate",
     "seed": "prisma db seed",
-    "cron": "ts-node --compiler-options {\\\"module\\\":\\\"commonjs\\\"} job/db.ts"
+    "cron": "ts-node --compiler-options {\\\"module\\\":\\\"commonjs\\\"} job/cron.ts"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"commonjs\"} prisma/seed.ts"
@@ -44,6 +44,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@types/chart.js": "^2.9.37",
     "@types/node-cron": "^3.0.8",
     "prisma": "^5.1.1",
     "ts-node": "^10.9.1"

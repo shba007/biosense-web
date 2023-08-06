@@ -36,7 +36,8 @@ Soft Skills: Collaborating on this project matured our communication, leadership
 ## Challenges we ran into 😦
 ---
 - Utilising the MQTT proved difficult
-
+- Employing AI since this was novel and there was a need to acquiant myself with a variation of networks along with data which proved dificult
+  
 ## Insights 🤓
 ---
 By analyzing data, providing personalized recommendations, and enabling remote monitoring, users can create an optimal environment for their plants. 

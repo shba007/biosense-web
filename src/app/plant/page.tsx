@@ -141,10 +141,10 @@ export default function PlantPage() {
   }
 
   return (
-    <div className="relative flex-grow flex flex-col gap-2 justify-between w-full min-h-screen h-max">
-      <div className="sm:hidden"></div>
+    <div className="relative flex-grow flex flex-col justify-end w-full min-h-screen h-max">
+      <div className="sm:hidden h-12"></div>
       <Splide
-        className="relative w-screen -left-4 mt-auto"
+        className="relative w-screen -left-4"
         ref={splide}
         options={{
           perPage: 1,

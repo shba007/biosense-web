@@ -7,22 +7,20 @@ import { convertBox, resize, reshape, base64ToArray } from "../../utils/helper";
 
 const CLASS_DIM: [number, number] = [224, 224]
 
-function argmax(array: number[]) {
-  if (!Array.isArray(array) || array.length === 0) {
-    throw new Error('Input must be a non-empty array.');
-  }
+function combineProbabilities(data: any) {
+  const diseaseMap = new Map();
 
-  let maxIndex = 0;
-  let maxValue = array[0];
-
-  for (let i = 1; i < array.length; i++) {
-    if (array[i] > maxValue) {
-      maxValue = array[i];
-      maxIndex = i;
+  data.forEach((item: any) => {
+    if (diseaseMap.has(item.disease)) {
+      const currentProb = diseaseMap.get(item.disease);
+      diseaseMap.set(item.disease, currentProb + item.prob);
+    } else {
+      diseaseMap.set(item.disease, item.prob);
     }
-  }
+  });
 
-  return maxIndex;
+  const combinedData = Array.from(diseaseMap, ([disease, prob]) => ({ disease, prob }));
+  return combinedData;
 }
 
 async function cropImage(image: Buffer, boxes: Box[]): Promise<Buffer[]> {
@@ -101,12 +99,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const images = await cropImage(imageArray ?? Buffer.from([]), boxes)
     // console.log({ images });
     const labels = await predict(images)
-    const diseases = ["Cercospora", "Fungal Leaf Spots", "Gray Mold", "Powdery Mildew", "Rust", "Sooty Mold", "White Mold", "Anthracnose", "Bacterial Leaf Spot", "Healthy"]
+    // "Powdery Mildew", "Root Rot", "Leaf Spot"
+    const diseases = ["Cercospora", "Leaf Spot", "Gray Mold", "Powdery Mildew", "Rust", "Sooty Mold", "White Mold", "Anthracnose", "Leaf Spot", "Healthy"]
 
-    return res.status(200).json(labels[0].map((prob, index) => ({
+    return res.status(200).json(combineProbabilities(labels[0].map((prob, index) => ({
       disease: diseases[index],
       prob: prob * 100
-    })))
+    }))))
   } catch (error: any) {
     if (error?.statusCode === 404)
       throw error

@@ -69,7 +69,7 @@ export default function SectionScan({}) {
   }
 
   return (
-    <section className="flex flex-col justify-between items-center h-full">
+    <section className="flex flex-col  justify-between items-center  gap-8 h-full">
       <div className="mx-auto rounded-xl w-full max-w-2xl aspect-[4/3] sm:aspect-[16/9] bg-primary-400/50 shadow-[0px_2px_18px_0px_rgba(0,0,0,0.15)_inset] overflow-hidden">
         <img ref={snapshot} className="w-full h-full object-contain" />
       </div>
